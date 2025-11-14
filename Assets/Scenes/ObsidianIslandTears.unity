@@ -835,14 +835,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1820591691}
-  - {fileID: 731388117}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 2.319, y: 51.206, z: -1.863}
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream
-=======
->>>>>>> Don
 --- !u!1 &731388115
 GameObject:
   m_ObjectHideFlags: 0
@@ -853,10 +847,6 @@ GameObject:
   m_Component:
   - component: {fileID: 731388117}
   - component: {fileID: 731388116}
-<<<<<<< HEAD
-=======
-  - component: {fileID: 731388118}
->>>>>>> Don
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: Untagged
@@ -877,10 +867,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputHandler
   CharacterController: {fileID: 533836043}
-<<<<<<< HEAD
-=======
-  playerInput: {fileID: 731388118}
->>>>>>> Don
 --- !u!4 &731388117
 Transform:
   m_ObjectHideFlags: 0
@@ -889,7 +875,6 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 731388115}
   serializedVersion: 2
-<<<<<<< HEAD
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 41.55735, y: -8, z: 38.91782}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -897,45 +882,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-=======
-  m_LocalRotation: {x: -0.01122389, y: -0.43228018, z: 0.023403373, w: 0.9013657}
-  m_LocalPosition: {x: 11.832275, y: -118.27419, z: -882.1748}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 533836049}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &731388118
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 731388115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
-  m_Actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
->>>>>>> Don
 --- !u!1 &803548546
 GameObject:
   m_ObjectHideFlags: 0
@@ -1469,10 +1415,6 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
-<<<<<<< HEAD
-=======
->>>>>>> Stashed changes
->>>>>>> Don
 --- !u!1 &1180126740
 GameObject:
   m_ObjectHideFlags: 0
@@ -3888,18 +3830,9 @@ SceneRoots:
   - {fileID: 1180126742}
   - {fileID: 1573608908}
   - {fileID: 533836049}
-<<<<<<< HEAD
   - {fileID: 731388117}
-=======
-<<<<<<< Updated upstream
-=======
->>>>>>> Don
   - {fileID: 1703384554}
   - {fileID: 217973988}
   - {fileID: 803548552}
   - {fileID: 1318958266}
   - {fileID: 1204608533}
-<<<<<<< HEAD
-=======
->>>>>>> Stashed changes
->>>>>>> Don
