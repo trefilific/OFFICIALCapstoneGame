@@ -9,6 +9,10 @@ public class PlayerController : MonoBehaviour
     private float _rotationY;
     private float _verticalVelocity;
 
+    [Header("Camera Settings")]
+    [SerializeField] private Transform cameraTransform;
+    private float _rotationX = 0f;
+
 
     Rigidbody rb;
 
@@ -33,8 +37,16 @@ public class PlayerController : MonoBehaviour
 
     public void Rotate(Vector2 rotationVector)
     {
+        //Horizontal Rotation
         _rotationY += rotationVector.x * RotateSpeed * Time.deltaTime;
         transform.localRotation = Quaternion.Euler(0, _rotationY, 0);
+
+        //Vertical Rotation
+        _rotationX -= rotationVector.y * RotateSpeed * Time.deltaTime;
+        _rotationX = Mathf.Clamp(_rotationX, -90f, 90f);
+        cameraTransform.localRotation = Quaternion.Euler(_rotationX, 0, 0);
+
+
     }
 
     public void Jump()

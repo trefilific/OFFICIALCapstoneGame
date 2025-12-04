@@ -691,6 +691,7 @@ MonoBehaviour:
   RotateSpeed: 5
   JumpForce: 10
   Gravity: -30
+  cameraTransform: {fileID: 1820591691}
 --- !u!143 &533836044
 CharacterController:
   m_ObjectHideFlags: 0
