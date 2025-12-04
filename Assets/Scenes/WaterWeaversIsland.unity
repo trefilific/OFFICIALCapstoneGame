@@ -2170,7 +2170,7 @@ GameObject:
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7422848464349959988, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -40927,7 +40927,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 549637630}
+  m_Mesh: {fileID: 1015028939}
 --- !u!33 &1177315772
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -54363,7 +54363,7 @@ Transform:
   m_GameObject: {fileID: 1531645626}
   serializedVersion: 2
   m_LocalRotation: {x: 0.057636566, y: 0.8538001, z: 0.10141324, w: -0.5073645}
-  m_LocalPosition: {x: -323, y: 231, z: -87}
+  m_LocalPosition: {x: 453.4, y: 231, z: 463.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -54438,6 +54438,7 @@ MonoBehaviour:
   RotateSpeed: 5
   JumpForce: 10
   Gravity: -30
+  cameraTransform: {fileID: 0}
 --- !u!114 &1531645635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57701,10 +57702,10 @@ Terrain:
   serializedVersion: 6
   m_TerrainData: {fileID: 15600000, guid: 798b54756fa78dd47a32c37dbef6608c, type: 2}
   m_TreeDistance: 5000
-  m_TreeBillboardDistance: 50
-  m_TreeCrossFadeLength: 5
+  m_TreeBillboardDistance: 2000
+  m_TreeCrossFadeLength: 200
   m_TreeMaximumFullLODCount: 50
-  m_DetailObjectDistance: 80
+  m_DetailObjectDistance: 1000
   m_DetailObjectDensity: 1
   m_HeightmapPixelError: 5
   m_SplatMapDistance: 1000
