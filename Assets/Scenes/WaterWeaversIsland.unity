@@ -54438,7 +54438,7 @@ MonoBehaviour:
   RotateSpeed: 5
   JumpForce: 10
   Gravity: -30
-  cameraTransform: {fileID: 0}
+  cameraTransform: {fileID: 35526807}
 --- !u!114 &1531645635
 MonoBehaviour:
   m_ObjectHideFlags: 0
