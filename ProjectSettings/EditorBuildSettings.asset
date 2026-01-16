@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
+<<<<<<< Updated upstream
+=======
+    path: Assets/Scenes/SampleScene.unity
+    guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+>>>>>>> Stashed changes
     path: Assets/Scenes/WaterWeaversIsland.unity
     guid: 24d48273535ef0b4cbab28c43e07b962
   - enabled: 1
