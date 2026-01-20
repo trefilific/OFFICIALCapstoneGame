@@ -4,13 +4,6 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/WaterWeaversIsland.unity
-    guid: 24d48273535ef0b4cbab28c43e07b962
-  - enabled: 1
-    path: Assets/Scenes/ObsidianIslandTears.unity
-    guid: 39f4a4dc96da6444d87d444a876746ba
-  m_configObjects:
-    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 23172213fdd93244186b78abafcd7e9b, type: 2}
+  m_Scenes: []
+  m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
