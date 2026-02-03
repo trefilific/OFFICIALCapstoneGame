@@ -1,50 +1,61 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyAi : MonoBehaviour
 {
-    public NavMeshAgent agent;
-    public Transform player;
-    public LayerMask whatIsGround, whatIsPlayer;
+    [Header("References")]
+    [SerializeField] private NavMeshAgent agent;
+    [SerializeField] private Transform player;
+    [SerializeField] private Transform firepoint;
+    [SerializeField] private GameObject projectilePrefab;
 
-    //Patrol
-    public Vector3 walkPoint;
-    bool walkPointSet;
-    public float walkPointRange;
+    [Header("Layers")]
+    [SerializeField] private LayerMask terrain;
+    [SerializeField] private LayerMask playerrLayerMask;
 
-    //Attack
-    public float timeBetweenAttacks;
-    bool alreadyAttacked;
-    public GameObject projectile;
+    [Header("Patroling")]
+    [SerializeField] private float patrolRadius = 10f;
+    private Vector3 walkPoint;
+    private bool hasPatrolPoint;
 
-    //States
-    public float sightRange, attackRange;
-    public bool playerInSightRange, playerInAttackRange;
+    [Header("Attacking")]
+    [SerializeField] private float attackCooldown = 1f;
+    private bool isOnAttackCooldown;
+    [SerializeField] private float forwardShotForce = 10f;
+    [SerializeField] private float verticalShotForce = 5f;
+
+    [Header("Detection Ranges")]
+    [SerializeField] private float visionRange = 20f;
+    [SerializeField] private float engagementRange = 10f;
+
+    private bool isPlayerVisible;
+    private bool isPlayerInRange;
+
 
     private void Awake()
     {
-        // Try to find player by name first, then by tag as a fallback
-        var playerObj = GameObject.Find("Player");
-        if (playerObj == null)
-            playerObj = GameObject.FindWithTag("Player");
-
-        if (playerObj != null)
-            player = playerObj.transform;
-        else
-            Debug.LogWarning("EnemyAi: could not find a GameObject named 'Player' or tagged 'Player' in the scene.");
-
-        agent = GetComponent<NavMeshAgent>();
+        if (player == null)
+        {
+            GameObject playerObj = GameObject.Find("Player");
+            if (playerObj != null)
+            {
+                player = playerObj.transform;
+            }
+            else
+            {
+                Debug.LogError("EnemyAi: No GameObject with tag 'Player' found in the scene.");
+            }
+        }
         if (agent == null)
         {
-            Debug.LogError("EnemyAi: no NavMeshAgent component found on this GameObject.");
-            return;
+            agent = GetComponent<NavMeshAgent>();
+            if (agent == null)
+            {
+                Debug.LogError("EnemyAi: No NavMeshAgent component found on this GameObject.");
+            }
         }
-
-        // Ensure agent is active and allowed to move
-        agent.enabled = true;
-        agent.updatePosition = true;
-        agent.updateRotation = true;
-        agent.isStopped = false;
     }
     void Start()
     {
@@ -52,72 +63,106 @@ public class EnemyAi : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (agent == null)
-            return; // nothing to do without an agent
-
-        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
-
-        if (!playerInSightRange && !playerInAttackRange)
-            Patroling();
-        else if (playerInSightRange && !playerInAttackRange)
-            ChasePlayer();
-        else if (playerInAttackRange && playerInSightRange)
-            AttackPlayer();
+        DetectPLayer();
+        UpdateBehaviourState();
     }
 
-    private void Patroling()
+    private void OnDrawGizmosSelected()
     {
-        if (!walkPointSet) SearchWalkPoint();
-        if (walkPointSet)
-            if (agent.isActiveAndEnabled)
-                agent.SetDestination(walkPoint);
-        Vector3 distanceToWalkPoint = transform.position - walkPoint;
-        //Walkpoint reached
-        if (distanceToWalkPoint.magnitude < 1f)
-            walkPointSet = false;
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, engagementRange);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, visionRange);
     }
 
-    private void SearchWalkPoint()
+    private void DetectPLayer()
     {
-        //Calculate random point in range
-        float randomZ = Random.Range(-walkPointRange, walkPointRange);
-        float randomX = Random.Range(-walkPointRange, walkPointRange);
-        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
-            walkPointSet = true;
+        isPlayerVisible = Physics.CheckSphere(transform.position, visionRange, playerrLayerMask);
+        isPlayerInRange = Physics.CheckSphere(transform.position, engagementRange, playerrLayerMask);
     }
 
-    private void ChasePlayer()
+    private void FireProjectile()
     {
-        if (player == null)
+        if (projectilePrefab == null || firepoint == null) return;
+        Rigidbody projectileRb = Instantiate(projectilePrefab, firepoint.position, Quaternion.identity).GetComponent<Rigidbody>();
+        projectileRb.AddForce(transform.forward * forwardShotForce, ForceMode.Impulse);
+        projectileRb.AddForce(transform.up * verticalShotForce, ForceMode.Impulse);
+
+        Destroy(projectileRb.gameObject, 3f);
+    }
+
+    private void FindPatrolPoint()
+    {
+        float randomZ = Random.Range(-patrolRadius, patrolRadius);
+        float randomX = Random.Range(-patrolRadius, patrolRadius);
+        Vector3 potentialPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+        if (Physics.Raycast(potentialPoint, -transform.up, 2f, terrain))
         {
-            Debug.LogWarning("EnemyAi: player reference is null when trying to chase.");
-            return;
+            walkPoint = potentialPoint;
+            hasPatrolPoint = true;
         }
-
-        if (agent.isActiveAndEnabled)
-            agent.SetDestination(player.position);
     }
 
-    private void AttackPlayer()
+    private IEnumerator AttackCooldownRoutine()
+    {
+        isOnAttackCooldown = true;
+        yield return new WaitForSeconds(attackCooldown);
+        isOnAttackCooldown = false;
+    }
+
+    private void PerformPatrol()
+    {
+        if(!hasPatrolPoint)
+            FindPatrolPoint();
+
+        if(hasPatrolPoint)
+            agent.SetDestination(walkPoint);
+
+        if(Vector3.Distance(transform.position, walkPoint) < 1f)
+            hasPatrolPoint = false;
+    }
+
+    private void PerformChase()
+    {
+        if(player != null)
+        {
+            agent.SetDestination(player.position);
+        }
+    }
+
+    private void PerformAttack()
     {
         agent.SetDestination(transform.position);
-        transform.LookAt(player);
-        if (!alreadyAttacked)
+
+        if (player != null)
         {
-            Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
-            rb.AddForce(transform.up * 8f, ForceMode.Impulse);
-            alreadyAttacked = true;
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
+            transform.LookAt(player);
+        }
+
+        if(!isOnAttackCooldown)
+        {
+            FireProjectile();
+            StartCoroutine(AttackCooldownRoutine());
         }
     }
 
-    private void ResetAttack()
+    private void UpdateBehaviourState()
     {
-        alreadyAttacked = false;
+        if (!isPlayerVisible && !isPlayerInRange)
+        {
+            PerformPatrol();
+        }
+        else if (isPlayerVisible && !isPlayerInRange)
+        {
+            PerformChase();
+        }
+        else if (isPlayerInRange & isPlayerVisible)
+        {
+            PerformAttack();
+        }
     }
 }
+
+    
