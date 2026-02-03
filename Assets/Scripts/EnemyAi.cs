@@ -23,8 +23,28 @@ public class EnemyAi : MonoBehaviour
 
     private void Awake()
     {
-        player = GameObject.Find("Player").transform;
+        // Try to find player by name first, then by tag as a fallback
+        var playerObj = GameObject.Find("Player");
+        if (playerObj == null)
+            playerObj = GameObject.FindWithTag("Player");
+
+        if (playerObj != null)
+            player = playerObj.transform;
+        else
+            Debug.LogWarning("EnemyAi: could not find a GameObject named 'Player' or tagged 'Player' in the scene.");
+
         agent = GetComponent<NavMeshAgent>();
+        if (agent == null)
+        {
+            Debug.LogError("EnemyAi: no NavMeshAgent component found on this GameObject.");
+            return;
+        }
+
+        // Ensure agent is active and allowed to move
+        agent.enabled = true;
+        agent.updatePosition = true;
+        agent.updateRotation = true;
+        agent.isStopped = false;
     }
     void Start()
     {
@@ -34,18 +54,26 @@ public class EnemyAi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (agent == null)
+            return; // nothing to do without an agent
+
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
-        if (!playerInSightRange && !playerInAttackRange) Patroling();
-        if (playerInSightRange && !playerInAttackRange) ChasePlayer();
-        if (playerInAttackRange && playerInSightRange) AttackPlayer();
+
+        if (!playerInSightRange && !playerInAttackRange)
+            Patroling();
+        else if (playerInSightRange && !playerInAttackRange)
+            ChasePlayer();
+        else if (playerInAttackRange && playerInSightRange)
+            AttackPlayer();
     }
 
     private void Patroling()
     {
         if (!walkPointSet) SearchWalkPoint();
         if (walkPointSet)
-            agent.SetDestination(walkPoint);
+            if (agent.isActiveAndEnabled)
+                agent.SetDestination(walkPoint);
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
         //Walkpoint reached
         if (distanceToWalkPoint.magnitude < 1f)
@@ -64,7 +92,14 @@ public class EnemyAi : MonoBehaviour
 
     private void ChasePlayer()
     {
-        agent.SetDestination(player.position);
+        if (player == null)
+        {
+            Debug.LogWarning("EnemyAi: player reference is null when trying to chase.");
+            return;
+        }
+
+        if (agent.isActiveAndEnabled)
+            agent.SetDestination(player.position);
     }
 
     private void AttackPlayer()
