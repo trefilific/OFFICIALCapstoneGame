@@ -8,5 +8,9 @@ public class ObjectiveDefinition : ScriptableObject
     [SerializeField] int requiredAmount;
     [SerializeField] string targetID;
    
-   
+    public string ObjectiveName => objectiveName;
+    public int RequiredAmount => requiredAmount;
+
+    public string TargetID => targetID;
+
 }
