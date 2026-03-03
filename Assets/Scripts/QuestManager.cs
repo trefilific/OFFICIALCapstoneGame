@@ -5,11 +5,24 @@ using UnityEngine;
 
 public class QuestManager : MonoBehaviour
 {
-    [SerializeField] ScriptableObject questItem;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+   public static QuestManager Instance { get; private set; }
+    private List<QuestInstance> activeQuests = new();
 
-   
-    void Start()
+    private Dictionary<GameplayEventType, Dictionary<string, List<ObjectiveInstance>>> routingTable = new();
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
+
+    /*void Start()
     {
         
     }
@@ -18,5 +31,5 @@ public class QuestManager : MonoBehaviour
     void Update()
     {
     
-    }
+    }*/
 }
