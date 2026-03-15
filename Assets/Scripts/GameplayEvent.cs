@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public struct GameplayEvent
+public struct GameplayEvent//was intially a struct
 {
     public GameplayEventType EventType;
     public string TargetId;
@@ -12,5 +12,9 @@ public struct GameplayEvent
         TargetId = targetId;
         Amount = amount;
     }
+    /*EnemyKilled,
+    ItemCollected,
+    AreaEntered,
+    NPCInteracted*/
 
 }

@@ -7,14 +7,14 @@ public class ObjectiveDefinition : ScriptableObject
     [SerializeField] string description;
     [SerializeField] int requiredAmount;
     [SerializeField] string targetID;
-    [SerializeField] GameplayEvent gameplayEvent;
+    [SerializeField] GameplayEventType eventType;
 
    
     public string ObjectiveName => objectiveName;
     public int RequiredAmount => requiredAmount;
 
     public string TargetID => targetID;
-    public GameplayEvent GameplayEvent => gameplayEvent;
+    public GameplayEventType EventType => eventType;
     
 
 }

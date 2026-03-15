@@ -24,7 +24,7 @@ public class ObjectiveInstance
         {
             Debug.Log($"Objective '{definition.ObjectiveName}' completed!");
             isCompleted = true;
-            OnObjectiveCompleted.Invoke(this);
+            OnObjectiveCompleted?.Invoke(this);
         }
     }
 
@@ -39,4 +39,5 @@ public class ObjectiveInstance
     public bool IsCompleted => isCompleted;
     public int CurrentAmount => currentAmount;
     public string TargetID => definition.TargetID;
+    public GameplayEventType EventType => definition.EventType;
 }
