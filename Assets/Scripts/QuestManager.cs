@@ -56,7 +56,7 @@ public class QuestManager : MonoBehaviour
     private void HandleQuestCompleted(QuestInstance quest)
     {
         UnregisterObjectives(quest);
-        activeQuests.Remove(quest);
+      //  activeQuests.Remove(quest);
         OnQuestRemoved?.Invoke(quest);
     }
 
@@ -64,7 +64,7 @@ public class QuestManager : MonoBehaviour
     {
         var questInstance = new QuestInstance(questDefinition);
         questInstance.OnQuestCompleted += HandleQuestCompleted;
-        activeQuests.Add(questInstance);
+       // activeQuests.Add(questInstance);
         OnQuestAdded?.Invoke(questInstance);
         RegisterObjectives(questInstance);
     }
