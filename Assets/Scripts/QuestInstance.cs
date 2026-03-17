@@ -8,7 +8,10 @@ public class QuestInstance
     private List<ObjectiveInstance> objectiveInstances;
     private bool isCompleted = false;
 
-    QuestInstance(QuestDefinition questDefinition)
+    public event System.Action<QuestInstance> OnQuestCompleted;
+    public event System.Action<ObjectiveInstance> OnObjectiveCompleted;
+
+    public QuestInstance(QuestDefinition questDefinition)
     {
         this._questDefinition = questDefinition;
         objectiveInstances = new List<ObjectiveInstance>();
@@ -27,6 +30,7 @@ public class QuestInstance
 
     private void HandleObjectiveCompleted(ObjectiveInstance objInstance)
     {
+        OnObjectiveCompleted?.Invoke(objInstance);
         CheckCompletion();
     }
     public void CheckCompletion()
@@ -41,8 +45,10 @@ public class QuestInstance
             }
         }
         isCompleted = true;
+        OnQuestCompleted?.Invoke(this);
     }
-    public List<ObjectiveInstance> ObjectiveInstances => objectiveInstances;
+    public IReadOnlyList<ObjectiveInstance> ObjectiveInstances => objectiveInstances;
     public bool IsCompleted => isCompleted;
+    public string QuestName => _questDefinition.QuestName;
 
 }

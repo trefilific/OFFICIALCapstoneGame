@@ -1,4 +1,4 @@
-using NUnit.Framework;
+//using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +11,7 @@ public class QuestDefinition : ScriptableObject
 
     public string QuestName => questName;
     public string Description => description;
-    public List<ObjectiveDefinition> Objectives => objectives;
+    public IReadOnlyList<ObjectiveDefinition> Objectives => objectives;
 
 
 
