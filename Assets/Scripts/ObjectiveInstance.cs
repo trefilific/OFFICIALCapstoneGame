@@ -40,4 +40,6 @@ public class ObjectiveInstance
     public int CurrentAmount => currentAmount;
     public string TargetID => definition.TargetID;
     public GameplayEventType EventType => definition.EventType;
+    public string ObjectiveName => definition.ObjectiveName;
+    public int RequiredAmount => definition.RequiredAmount;
 }

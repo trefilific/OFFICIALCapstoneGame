@@ -6,9 +6,12 @@ using UnityEngine;
 public class QuestManager : MonoBehaviour
 {
    public static QuestManager Instance { get; private set; }
-    private List<QuestInstance> activeQuests = new();
+    public IReadOnlyList<QuestInstance> activeQuests => activeQuests;
 
     private Dictionary<GameplayEventType, Dictionary<string, List<ObjectiveInstance>>> routingTable = new();
+
+    public event System.Action<QuestInstance> OnQuestAdded;
+    public event System.Action<QuestInstance> OnQuestRemoved;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
@@ -54,6 +57,7 @@ public class QuestManager : MonoBehaviour
     {
         UnregisterObjectives(quest);
         activeQuests.Remove(quest);
+        OnQuestRemoved?.Invoke(quest);
     }
 
     public void AddQuest(QuestDefinition questDefinition)
@@ -61,6 +65,7 @@ public class QuestManager : MonoBehaviour
         var questInstance = new QuestInstance(questDefinition);
         questInstance.OnQuestCompleted += HandleQuestCompleted;
         activeQuests.Add(questInstance);
+        OnQuestAdded?.Invoke(questInstance);
         RegisterObjectives(questInstance);
     }
 
