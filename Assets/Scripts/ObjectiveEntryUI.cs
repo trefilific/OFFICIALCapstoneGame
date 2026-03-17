@@ -2,7 +2,20 @@ using UnityEngine;
 
 public class ObjectiveEntryUI : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] TMPro.TextMeshProUGUI text;
+
+    ObjectiveInstance objective;
+
+    public void Initialize(ObjectiveInstance obj)
+    {
+        objective = obj;
+        Refresh();
+    }
+  
+    void Refresh()
+    {
+        text.text = $"{objective.ObjectiveName} ({objective.CurrentAmount}/{objective.RequiredAmount})";
+    }
     void Start()
     {
         
