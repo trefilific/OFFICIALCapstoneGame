@@ -162,6 +162,8 @@ public class PlayerController : MonoBehaviour
     private bool _jumpQueued;
     private bool _isAttacking;
 
+    public int keyCount = 0;
+    public int sapCount = 0;
     private void Start()
     {
         _characterController = GetComponent<CharacterController>();
@@ -229,5 +231,30 @@ public class PlayerController : MonoBehaviour
         {
             _animator.SetTrigger("Hit");
         }
+    }
+
+   
+
+    public void GiveKey()
+    {
+        keyCount++;
+        Debug.Log("Picked up a key! Total keys: " + keyCount);
+    }
+
+    public bool UseKeys(int amount)
+    {
+        if (keyCount >= amount)
+        {
+            keyCount -= amount;
+            return true;
+        }
+
+        return false;
+    }
+
+    public void GiveSap(int amount)
+    {
+        sapCount += amount;
+        Debug.Log("Gained Sap! Total sap: " + sapCount);
     }
 }
