@@ -233,12 +233,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-   
+
 
     public void GiveKey()
     {
         keyCount++;
         Debug.Log("Picked up a key! Total keys: " + keyCount);
+
+        if (QuestManager.Instance != null)
+        {
+            QuestManager.Instance.OnKeyCollected();
+        }
     }
 
     public bool UseKeys(int amount)
@@ -246,9 +251,11 @@ public class PlayerController : MonoBehaviour
         if (keyCount >= amount)
         {
             keyCount -= amount;
+            Debug.Log("Used " + amount + " key(s). Remaining keys: " + keyCount);
             return true;
         }
 
+        Debug.Log("Not enough keys.");
         return false;
     }
 
@@ -256,5 +263,11 @@ public class PlayerController : MonoBehaviour
     {
         sapCount += amount;
         Debug.Log("Gained Sap! Total sap: " + sapCount);
+
+        if (QuestManager.Instance != null)
+        {
+            QuestManager.Instance.OnSapCollected();
+        }
     }
+
 }
