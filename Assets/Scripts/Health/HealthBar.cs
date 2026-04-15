@@ -1,15 +1,16 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    [SerializeField] GameObject healthBarFill;
+    [SerializeField] private Scrollbar healthBarFill;
 
 
-
-    public void UpdateHealthBar(float healthPercentage)
+    public void UpdateHealthBar(float maxHealth, float currentHealth)
     {
-        healthBarFill.transform.localScale = new Vector3(healthPercentage, 1f, 1f);
+        healthBarFill.size = currentHealth/maxHealth;
     }
 
-    
+
+
 }
