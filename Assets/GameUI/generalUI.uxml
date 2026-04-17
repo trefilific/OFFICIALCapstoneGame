@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:VisualElement name="container" style="flex-grow: 1; align-content: center; flex-basis: 20%; height: 20%;">
+            <ui:Label text="Waveweaver Island" name="islandName" emoji-fallback-support="false" style="font-size: 50px; -unity-font-style: bold; background-color: rgb(70, 110, 183); background-size: 100% 100%; width: 30%; -unity-text-align: upper-center; top: 10px; left: 10px; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; -unity-font-definition: url(&quot;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&amp;guid=79495bc94b955784586aae6d3847cd18&amp;type=3#NotInter-Regular&quot;);" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
