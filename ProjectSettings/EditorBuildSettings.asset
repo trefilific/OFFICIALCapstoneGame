@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/mainMenuUI.unity
+    guid: da389bda4900c574c83b1e7496463c9f
+  - enabled: 1
     path: Assets/Scenes/WaterWeaversIsland.unity
     guid: 24d48273535ef0b4cbab28c43e07b962
   m_configObjects:
