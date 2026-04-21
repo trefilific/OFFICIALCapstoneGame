@@ -32715,6 +32715,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1394971405}
   keyCount: 0
   sapCount: 0
+  isBoat: 0
 --- !u!4 &581483608
 Transform:
   m_ObjectHideFlags: 0
@@ -33395,7 +33396,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1132527974}
+  m_Mesh: {fileID: 1971792346}
 --- !u!33 &649569149
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -54698,7 +54699,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1132527974}
+  m_Mesh: {fileID: 578569517}
 --- !u!33 &961252624
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -112759,7 +112760,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 624477985}
+  m_Mesh: {fileID: 1132527974}
 --- !u!33 &1774058040
 MeshFilter:
   m_ObjectHideFlags: 10
