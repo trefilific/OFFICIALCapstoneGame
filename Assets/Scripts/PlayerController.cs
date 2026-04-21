@@ -164,6 +164,8 @@ public class PlayerController : MonoBehaviour
 
     public int keyCount = 0;
     public int sapCount = 0;
+
+    public bool isBoat = false;
     private void Start()
     {
         _characterController = GetComponent<CharacterController>();
@@ -195,7 +197,14 @@ public class PlayerController : MonoBehaviour
 
         _jumpQueued = false;
 
-        _verticalVelocity += Gravity * Time.deltaTime;
+        if (isBoat)
+        {
+            _verticalVelocity = 0f;
+        }
+        else
+        {
+            _verticalVelocity += Gravity * Time.deltaTime;
+        }
         _characterController.Move(new Vector3(0f, _verticalVelocity, 0f) * Time.deltaTime);
 
         _rotationY += _lookInput.x * RotateSpeed * Time.deltaTime;
