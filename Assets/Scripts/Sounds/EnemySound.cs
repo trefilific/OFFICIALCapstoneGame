@@ -19,9 +19,22 @@ public class EnemySound : MonoBehaviour
 
     public void Enemy_Footsteps()
     {
-        int randEnemyStep = Random.Range(0,enemyStepClips.Length);
+        if (enemyStepClips == null || enemyStepClips.Length == 0)
+        {
+           // Debug.LogWarning("[EnemySound] No enemy step clips assigned!");
+            return;
+        }
+
+        if (enemyStepsAudio == null)
+        {
+           // Debug.LogError("[EnemySound] AudioSource not assigned!");
+            return;
+        }
+
+        int randEnemyStep = Random.Range(0, enemyStepClips.Length);
         enemyStepsAudio.clip = enemyStepClips[randEnemyStep];
         enemyStepsAudio.Play();
-        print("Player Footstep (Sound)");
+
+       // Debug.Log($"[EnemySound] Playing footstep index: {randEnemyStep}");
     }
 }

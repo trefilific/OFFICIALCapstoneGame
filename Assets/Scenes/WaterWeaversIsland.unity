@@ -7608,8 +7608,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ba9458bd65a743daa8bdb65e965567f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySound
-  enemyStepsAudio: {fileID: 0}
+  enemyStepsAudio: {fileID: 82661709}
   enemyStepClips: []
+--- !u!82 &82661709 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2791305835597767072, guid: 43d71d0d30869104083abd339ad357c7, type: 3}
+  m_PrefabInstance: {fileID: 82661704}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &88327658
 Mesh:
   m_ObjectHideFlags: 0
