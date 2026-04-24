@@ -15,12 +15,12 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-       // if (other.CompareTag("Enemy"))
-        //{
+       if (other.CompareTag("Projectile"))
+        {
             currentHealth -= (int)damgage;
             currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
             healthBar.UpdateHealthBar(maxHealth, currentHealth);
-       // }
+       }
     }
 
     
