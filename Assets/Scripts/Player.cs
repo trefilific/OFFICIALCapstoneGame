@@ -28,6 +28,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(currentHealth <= 0)
+        {
+            Debug.Log("Player is dead!");
+            Destroy(gameObject);
+            // You can add additional logic here, such as respawning the player or ending the game.
+        }
     }
 }
