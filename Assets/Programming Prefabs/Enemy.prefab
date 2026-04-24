@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 1613176704840656536}
   - component: {fileID: 2791305835597767072}
   - component: {fileID: 4597756438809207177}
+  - component: {fileID: 429657623033637399}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -335,6 +336,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemySound
   enemyStepsAudio: {fileID: 2791305835597767072}
   enemyStepClips: []
+--- !u!114 &429657623033637399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6317142487871082574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7b111dd08c924548a2b2fd9ced3fb21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  maxHealth: 30
+  currentHealth: 0
+  damgage: 10
 --- !u!1001 &6450596763697479004
 PrefabInstance:
   m_ObjectHideFlags: 0
