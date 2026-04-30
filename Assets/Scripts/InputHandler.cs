@@ -29,7 +29,7 @@ public class InputHandler : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    private void Update()
+    public void Update()
     {
         if (characterController == null) return;
 
@@ -37,7 +37,7 @@ public class InputHandler : MonoBehaviour
         characterController.Move(movementVector);
 
         Vector2 lookVector = _lookAction.ReadValue<Vector2>();
-        characterController.Rotate(lookVector);
+        characterController.Rotate(lookVector * 5);
     }
 
     private void OnJumpPerformed(InputAction.CallbackContext context)
