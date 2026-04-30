@@ -166,10 +166,28 @@ public class PlayerController : MonoBehaviour
     public int sapCount = 0;
 
     public bool isBoat = false;
+    //private void Start()
+    //{
+    //    _characterController = GetComponent<CharacterController>();
+    //    _animator = GetComponentInChildren<Animator>();
+    //}
     private void Start()
     {
         _characterController = GetComponent<CharacterController>();
-        _animator = GetComponentInChildren<Animator>();
+        _animator = GetComponentInChildren<Animator>(true);
+
+        Debug.Log("[PlayerController] Object name: " + gameObject.name);
+        Debug.Log("[PlayerController] CharacterController found: " + (_characterController != null));
+        Debug.Log("[PlayerController] Animator found: " + (_animator != null ? _animator.name : "NULL"));
+
+        if (_animator != null)
+        {
+            Debug.Log("[PlayerController] Animator active: " + _animator.gameObject.activeInHierarchy);
+            Debug.Log("[PlayerController] Animator enabled: " + _animator.enabled);
+            Debug.Log("[PlayerController] Animator controller: " +
+                (_animator.runtimeAnimatorController != null ? _animator.runtimeAnimatorController.name : "NULL"));
+            Debug.Log("[PlayerController] Animator culling: " + _animator.cullingMode);
+        }
     }
 
     private void Update()
